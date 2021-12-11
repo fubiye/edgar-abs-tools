@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import com.fubiye.edgar.tools.config.FormConfig;
 import com.fubiye.edgar.tools.exception.DocParseException;
 import com.fubiye.edgar.tools.exception.DocReadException;
+import com.fubiye.edgar.tools.model.FilingDocContent;
 import com.fubiye.edgar.tools.model.FilingMeta;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -14,7 +15,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import static com.fubiye.edgar.tools.constant.EdgarFormConstants.DOCUMENT;
+import static com.fubiye.edgar.tools.constant.FormConstants.DOCUMENT;
+import static com.fubiye.edgar.tools.constant.FormConstants.TEXT;
 
 @Slf4j
 public class FormFilingReader extends AbstractFilingReader {
@@ -54,8 +56,13 @@ public class FormFilingReader extends AbstractFilingReader {
   }
 
   @Override
-  protected void readContent() {
-    
+  public FilingDocContent readContent() {
+    FilingDocContent content = new FilingDocContent();
+    currElements = document.select(DOCUMENT).select(TEXT);
+    for(var elements: currElements.first().children()){
+      System.out.println(elements.tag());
+    }
+    return content;
   }
   
 }

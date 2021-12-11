@@ -3,6 +3,7 @@ package com.fubiye.edgar.tools.reader;
 import java.io.File;
 
 import com.fubiye.edgar.tools.model.FilingDoc;
+import com.fubiye.edgar.tools.model.FilingDocContent;
 import com.fubiye.edgar.tools.model.FilingMeta;
 
 public abstract class AbstractFilingReader implements FilingReader {
@@ -15,9 +16,7 @@ public abstract class AbstractFilingReader implements FilingReader {
 
   public FilingDoc read() {
     doc.setMeta(readMeta());
-    readContent();
+    doc.setContent(readContent());
     return doc;
   }
-  protected abstract void readContent();
-  
 }

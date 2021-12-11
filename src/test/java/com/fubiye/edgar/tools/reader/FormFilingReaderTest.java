@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.util.Arrays;
 
-import static com.fubiye.edgar.tools.constant.EdgarFormConstants.*;
+import static com.fubiye.edgar.tools.constant.FormConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FormFilingReaderTest {
@@ -30,5 +30,10 @@ class FormFilingReaderTest {
     assertEquals("8-K", meta.getType());
     assertEquals("1", meta.getSequence());
     assertEquals("v212238_8-k.htm", meta.getFilename());
+  }
+
+  @Test
+  public void testReadContent(){
+    var content = reader.readContent();
   }
 }

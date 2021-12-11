@@ -9,4 +9,5 @@ public class FilingMeta {
   private String type;
   private String sequence;
   private String filename;
+  private String href;
 }
