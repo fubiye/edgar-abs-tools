@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'com.fubiye'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+  compileOnly "org.projectlombok:lombok:$lombokVersion"
+  annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+  implementation "org.jsoup:jsoup:$jsoupVersion"
+  implementation "ch.qos.logback:logback-classic:$logbackVersion"
+  implementation "commons-io:commons-io:$apacheCommonsVersion"
+  implementation "org.apache.commons:commons-lang3:$apacheCommonsLangVersion"
+
+
+  testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+}
+
+test {
+    useJUnitPlatform()
+}
