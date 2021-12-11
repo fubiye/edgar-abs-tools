@@ -1,5 +1,6 @@
 package com.fubiye.edgar.tools.reader;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fubiye.edgar.tools.config.FormConfig;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,7 +34,9 @@ class FormFilingReaderTest {
   }
 
   @Test
-  public void testReadContent(){
+  public void testReadContent() throws Exception{
     var content = reader.readContent();
+    ObjectMapper mapper = new ObjectMapper();
+    System.out.println(mapper.writeValueAsString(content));
   }
 }

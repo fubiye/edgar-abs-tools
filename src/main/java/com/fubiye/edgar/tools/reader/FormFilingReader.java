@@ -3,10 +3,13 @@ package com.fubiye.edgar.tools.reader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.stream.Collectors;
 
 import com.fubiye.edgar.tools.config.FormConfig;
 import com.fubiye.edgar.tools.exception.DocParseException;
 import com.fubiye.edgar.tools.exception.DocReadException;
+import com.fubiye.edgar.tools.extractor.ChunkExtractor;
+import com.fubiye.edgar.tools.extractor.SimpleTextExtractor;
 import com.fubiye.edgar.tools.model.FilingDocContent;
 import com.fubiye.edgar.tools.model.FilingMeta;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +26,13 @@ public class FormFilingReader extends AbstractFilingReader {
   protected Document document;
   protected Elements currElements;
   protected FormConfig config;
+  protected ChunkExtractor<String> extractor = new SimpleTextExtractor();;
 
   public FormFilingReader(File file, FormConfig config) {
     super(file);
     this.config = config;
     parse();
+
   }
 
   private void parse() {
@@ -59,9 +64,8 @@ public class FormFilingReader extends AbstractFilingReader {
   public FilingDocContent readContent() {
     FilingDocContent content = new FilingDocContent();
     currElements = document.select(DOCUMENT).select(TEXT);
-    for(var elements: currElements.first().children()){
-      System.out.println(elements.tag());
-    }
+    var elements =  currElements.first().children().stream().map(element ->  extractor.extract(element)).collect(Collectors.toList());
+    content.setElements(elements);
     return content;
   }
   

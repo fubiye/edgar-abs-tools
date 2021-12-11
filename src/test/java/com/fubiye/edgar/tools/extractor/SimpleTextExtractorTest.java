@@ -22,9 +22,9 @@ class SimpleTextExtractorTest {
                             </div>
         """;
     var elements = Jsoup.parse(html).select("body").first().children();
-    var ele = extractor.extract(elements);
+    var ele = extractor.extract(elements.first());
     assertEquals("div", ele.getType());
-    assertEquals("RWT HOLDINGS, INC.", ele.getPayload().get(0));
+    assertEquals("RWT HOLDINGS, INC.", ele.getPayload().get(1));
   }
 
   @Test
@@ -36,7 +36,7 @@ class SimpleTextExtractorTest {
                                   PNC Bank, National Association.&nbsp; Thus, the servicer compliance statement provided by Midland Loan Services</font></p>
         """;
     var elements = Jsoup.parse(html).select("body").first().children();
-    var ele = extractor.extract(elements);
+    var ele = extractor.extract(elements.first());
     assertEquals("p", ele.getType());
     assertEquals(3, ele.getPayload().size());
     assertEquals("pari passu", ele.getPayload().get(1));

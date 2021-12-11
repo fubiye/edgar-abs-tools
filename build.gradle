@@ -17,10 +17,11 @@ dependencies {
   implementation "ch.qos.logback:logback-classic:$logbackVersion"
   implementation "commons-io:commons-io:$apacheCommonsVersion"
   implementation "org.apache.commons:commons-lang3:$apacheCommonsLangVersion"
+  implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
 
 
   testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
 test {
